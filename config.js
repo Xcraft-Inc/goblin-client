@@ -12,6 +12,12 @@ module.exports = [
   },
   {
     type: 'input',
+    name: 'mainGoblinModule',
+    message: 'Main goblin module name',
+    default: '',
+  },
+  {
+    type: 'input',
     name: 'contextId',
     message: 'Initial context',
     default: '',
