@@ -13,6 +13,7 @@
     }
   },
   "dependencies": {
+    "electron-devtools-installer": "^2.2.4",
     "goblin-configurator": "^0.0.1",
     "goblin-laboratory": "^0.0.1",
     "goblin-wm": "^0.0.1",
@@ -20,7 +21,6 @@
   },
   "devDependencies": {
     "devtron": "^1.4.0",
-    "electron-devtools-installer": "^2.2.0",
     "goblin-webpack": "^0.0.1",
     "xcraft-dev-rules": "^0.3.0",
     "prettier": "1.15.1"
