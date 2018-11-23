@@ -15,6 +15,7 @@
   "dependencies": {
     "electron-devtools-installer": "^2.2.4",
     "goblin-configurator": "^0.0.1",
+    "goblin-theme": "^0.0.1",
     "goblin-laboratory": "^0.0.1",
     "goblin-wm": "^0.0.1",
     "xcraft-core-goblin": "^2.0.0"
