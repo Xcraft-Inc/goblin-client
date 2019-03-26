@@ -13,6 +13,7 @@
     }
   },
   "dependencies": {
+    "copy-paste": "^1.3.0",
     "electron-devtools-installer": "^2.2.4",
     "goblin-configurator": "^0.0.1",
     "goblin-theme": "^0.0.1",
