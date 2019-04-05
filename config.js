@@ -28,10 +28,4 @@ module.exports = [
     message: 'Use the configurator root widget',
     default: false,
   },
-  {
-    type: 'input',
-    name: 'defaultZoom',
-    message: 'Set default zoom for Electron frontend',
-    default: false,
-  },
 ];
