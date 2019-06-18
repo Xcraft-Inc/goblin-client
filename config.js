@@ -23,6 +23,12 @@ module.exports = [
     default: '',
   },
   {
+    type: 'input',
+    name: 'themeContext',
+    message: 'theme context',
+    default: '',
+  },
+  {
     type: 'confirm',
     name: 'useConfigurator',
     message: 'Use the configurator root widget',
