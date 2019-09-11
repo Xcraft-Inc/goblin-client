@@ -34,4 +34,10 @@ module.exports = [
     message: 'Use the configurator root widget',
     default: false,
   },
+  {
+    type: 'confirm',
+    name: 'useLogin',
+    message: 'Use passport login process',
+    default: false,
+  },
 ];
