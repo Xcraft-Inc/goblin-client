@@ -23,10 +23,10 @@ module.exports = [
     default: '',
   },
   {
-    type: 'input',
-    name: 'themeContext',
-    message: 'theme context',
-    default: '',
+    type: 'checkbox',
+    name: 'themeContexts',
+    message: 'available theme contexts',
+    default: [],
   },
   {
     type: 'confirm',
