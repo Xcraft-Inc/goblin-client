@@ -18,7 +18,7 @@
     "goblin-nabu": "^0.0.1",
     "goblin-theme": "^0.0.1",
     "goblin-wm": "^0.0.1",
-    "xcraft-core-goblin": "^3.0.0"
+    "xcraft-core-goblin": "^4.0.1"
   },
   "devDependencies": {
     "electron": "8.4.1",
