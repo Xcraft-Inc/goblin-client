@@ -17,7 +17,7 @@
     "goblin-laboratory": "^1.0.0",
     "goblin-nabu": "^1.0.0",
     "goblin-theme": "^1.0.0",
-    "goblin-wm": "^0.0.1",
+    "goblin-wm": "^1.0.0",
     "xcraft-core-goblin": "^4.0.1"
   },
   "devDependencies": {
