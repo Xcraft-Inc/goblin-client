@@ -13,12 +13,18 @@
     }
   },
   "dependencies": {
+    "gigawatts": "^4.0.5",
     "goblin-configurator": "^1.0.0",
     "goblin-laboratory": "^1.0.0",
     "goblin-nabu": "^1.0.0",
     "goblin-theme": "^1.0.0",
     "goblin-wm": "^1.0.0",
-    "xcraft-core-goblin": "^4.0.1"
+    "statedb": "^2.2.0",
+    "xcraft-core-etc": "^2.0.4",
+    "xcraft-core-fs": "^2.1.0",
+    "xcraft-core-host": "^2.3.0",
+    "xcraft-core-goblin": "^4.0.1",
+    "xcraft-core-utils": "^3.0.0"
   },
   "devDependencies": {
     "electron": "8.4.1",
