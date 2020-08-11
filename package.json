@@ -13,7 +13,7 @@
     }
   },
   "dependencies": {
-    "goblin-configurator": "^0.0.1",
+    "goblin-configurator": "^1.0.0",
     "goblin-laboratory": "^1.0.0",
     "goblin-nabu": "^1.0.0",
     "goblin-theme": "^1.0.0",
