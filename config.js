@@ -23,7 +23,7 @@ module.exports = [
     default: '',
   },
   {
-    type: 'list',
+    type: 'checkbox',
     name: 'themeContexts',
     message: 'available theme contexts',
     default: [],
