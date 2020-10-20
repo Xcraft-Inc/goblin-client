@@ -19,7 +19,7 @@
     "goblin-nabu": "^1.0.0",
     "goblin-theme": "^1.0.0",
     "goblin-wm": "^1.0.0",
-    "statedb": "^2.2.0",
+    "statedb": "^3.0.0",
     "xcraft-core-etc": "^2.0.4",
     "xcraft-core-fs": "^2.1.0",
     "xcraft-core-host": "^2.3.0",
