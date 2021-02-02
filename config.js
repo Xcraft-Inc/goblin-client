@@ -40,4 +40,10 @@ module.exports = [
     message: 'Use passport login process',
     default: false,
   },
+  {
+    type: 'input',
+    name: 'appUserModelId',
+    message: 'Windows AppUserModelId',
+    default: null,
+  },
 ];
