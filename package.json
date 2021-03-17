@@ -13,6 +13,7 @@
     }
   },
   "dependencies": {
+    "fs-extra": "^9.1.0",
     "gigawatts": "^4.0.5",
     "goblin-configurator": "^1.0.0",
     "goblin-laboratory": "^1.0.0",
