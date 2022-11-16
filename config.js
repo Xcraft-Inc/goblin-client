@@ -46,4 +46,10 @@ module.exports = [
     message: 'Windows AppUserModelId',
     default: null,
   },
+  {
+    type: 'confirm',
+    name: 'fullscreenable',
+    message: 'Set to false to disable fullscreen support',
+    default: true,
+  },
 ];
