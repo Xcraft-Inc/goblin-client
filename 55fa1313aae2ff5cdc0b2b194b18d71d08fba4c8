@@ -1,0 +1,9 @@
+[
+  {
+    "Module": "goblin-client",
+    "Version": "v2.1.6",
+    "Hash": "55fa131",
+    "Dev": "master",
+    "Prod": "2.1"
+  }
+]
