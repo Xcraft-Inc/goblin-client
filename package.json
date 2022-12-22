@@ -15,7 +15,7 @@
   "dependencies": {
     "fs-extra": "^9.1.0",
     "gigawatts": "^4.0.5",
-    "goblin-configurator": "^2.0.0",
+    "goblin-configurator": "^3.0.0",
     "goblin-laboratory": "^2.0.0",
     "goblin-nabu": "^2.0.0",
     "goblin-theme": "^2.0.0",
