@@ -30,7 +30,9 @@
   "devDependencies": {
     "electron-devtools-installer": "^3.1.1",
     "goblin-webpack": "^4.0.0",
+    "got": "^11.8.3",
     "prettier": "2.0.4",
+    "unzipper": "^0.10.14",
     "xcraft-dev-prettier": "^2.0.0",
     "xcraft-dev-rules": "^4.1.0"
   },
