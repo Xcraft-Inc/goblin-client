@@ -24,6 +24,13 @@ Ce module sert de pont entre le framework Xcraft et l'environnement Electron, pe
 
 Le module maintient l'état des fenêtres, des sessions et des préférences utilisateur, et fournit des mécanismes pour gérer les événements du système et les interactions entre les différents composants de l'application.
 
+### Variables d'environnement
+
+| Variable | Description | Exemple | Valeur par défaut |
+|----------|-------------|---------|------------------|
+| NODE_ENV | Détermine le mode d'exécution (development/production) | development | - |
+| APPIMAGE | Chemin vers l'AppImage lors de l'exécution dans ce format | /path/to/app.AppImage | - |
+
 ## Exemples d'utilisation
 
 ### Démarrage d'une application client
@@ -85,14 +92,16 @@ async elfQuest() {
 
 Le module `goblin-client` peut être configuré via le fichier `config.js` avec les options suivantes :
 
-- **mainGoblin** : Le goblin principal à démarrer
-- **mainGoblinModule** : Le nom du module du goblin principal
-- **contextId** : Le contexte initial
-- **themeContexts** : Les contextes de thème disponibles
-- **useConfigurator** : Utiliser le widget configurateur comme racine
-- **useLogin** : Utiliser le processus de login passport
-- **appUserModelId** : L'identifiant AppUserModelId pour Windows
-- **fullscreenable** : Activer ou désactiver le support du mode plein écran
+| Option | Description | Type | Valeur par défaut |
+|--------|-------------|------|------------------|
+| mainGoblin | Le goblin principal à démarrer | String | "" |
+| mainGoblinModule | Le nom du module du goblin principal | String | "" |
+| contextId | Le contexte initial | String | "" |
+| themeContexts | Les contextes de thème disponibles | Array | [] |
+| useConfigurator | Utiliser le widget configurateur comme racine | Boolean | false |
+| useLogin | Utiliser le processus de login passport | Boolean | false |
+| appUserModelId | L'identifiant AppUserModelId pour Windows | String | null |
+| fullscreenable | Activer ou désactiver le support du mode plein écran | Boolean | true |
 
 ## Détails des sources
 
@@ -107,14 +116,27 @@ Ce fichier définit le service principal du client. Il gère le cycle de vie com
 - Gestion de l'authentification
 - Démarrage de l'interface utilisateur
 
-Le service expose plusieurs quêtes importantes :
+#### Méthodes publiques
 
-- `boot` : Initialise l'environnement Electron
-- `start` : Démarre le client
-- `openSession` : Ouvre une nouvelle session
-- `startDesktopAppSession` : Démarre une session d'application de bureau
-- `changeLocale` : Change la langue de l'interface
-- `appRelaunch` : Relance l'application en cas de problème
+- **`boot()`** - Initialise l'environnement Electron, configure les outils de développement, et prépare l'URL pour le chargement de l'application.
+- **`start()`** - Démarre le client, crée une session laboratoire et charge l'interface utilisateur.
+- **`createSession(mainGoblin, labId, feed, parent)`** - Crée une nouvelle session client pour persister les préférences utilisateur.
+- **`loadLaboratory()`** - Charge l'environnement laboratoire pour l'interface utilisateur.
+- **`getLoginSessionId()`** - Récupère l'ID de la session de login.
+- **`startUX()`** - Démarre l'interface utilisateur, gère le login si nécessaire et lance la configuration ou la session d'application.
+- **`dataTransfer(labId, desktopId, filePaths)`** - Gère le transfert de fichiers vers l'application.
+- **`logout()`** - Déconnecte l'utilisateur en supprimant les tokens d'authentification.
+- **`login(desktopId, loginSessionId, clientConfig)`** - Gère le processus de login, vérifie les tokens existants ou demande une nouvelle authentification.
+- **`configure(desktopId, userId, username, clientSessionId, clientConfig, oldDesktopId)`** - Configure l'interface utilisateur avec le configurateur.
+- **`getConfig()`** - Récupère la configuration du client.
+- **`closeWindow(labId)`** - Ferme une fenêtre d'application.
+- **`openSession(session, username, userId, rootWidget, configuration, mainGoblin, mandate)`** - Ouvre une nouvelle session d'application.
+- **`startDesktopAppSession(rootWidget, configuration, session, username, userId, labId, clientSessionId, desktopId, mainGoblin, useConfigurator)`** - Démarre une session d'application de bureau.
+- **`closeSession(labId, sessionDesktopId)`** - Ferme une session d'application.
+- **`openExternal(url)`** - Ouvre une URL ou un chemin dans le navigateur ou l'application par défaut du système.
+- **`changeLocale(locale, mainGoblin, clientSessionId)`** - Change la langue de l'interface.
+- **`getLocale(mainGoblin, clientSessionId)`** - Récupère la langue actuelle de l'interface.
+- **`appRelaunch(reason)`** - Relance l'application en cas de problème avec la connexion au serveur.
 
 ```javascript
 // Dans une méthode d'un acteur Elf
@@ -138,6 +160,60 @@ Ce fichier définit un service qui gère la persistance des préférences utilis
 - Les états des splitters et dialogues
 - Les dernières couleurs utilisées
 
+#### État et modèle de données
+
+L'état de la session client comprend :
+
+```javascript
+{
+  zoom: 1,                   // Niveau de zoom de l'interface
+  locale: null,              // Langue actuelle de l'interface
+  userLocale: null,          // Préférence de langue de l'utilisateur
+  theme: null,               // Thème visuel actuel
+  views: {},                 // Configuration des vues (colonnes, tris)
+  tips: {},                  // État des astuces (affichées/masquées)
+  splitters: {},             // Position des séparateurs
+  dialogs: {},               // État des boîtes de dialogue
+  desktopClock: {},          // Configuration de l'horloge de bureau
+  translatableTextField: {}, // Configuration des champs de texte traduisibles
+  lastColorsPicker: [],      // Dernières couleurs utilisées
+  accessToEggsThemes: false, // Accès aux thèmes spéciaux
+  prototypeMode: false,      // Mode prototype activé/désactivé
+  windows: [],               // État des fenêtres
+  private: {                 // Données privées
+    osLocale: null,          // Langue du système d'exploitation
+    windowIndexes: {count: 0} // Compteur et index des fenêtres
+  }
+}
+```
+
+#### Méthodes publiques
+
+- **`create(id, sessionStorage)`** - Crée une nouvelle session client ou restaure une session existante.
+- **`setViewColumnsOrder(viewId, columnsIds)`** - Définit l'ordre des colonnes pour une vue.
+- **`setViewColumnWidth(viewId, columnId, width)`** - Définit la largeur d'une colonne pour une vue.
+- **`setViewColumnSorting(viewId, columnId, direction)`** - Définit le tri d'une colonne pour une vue.
+- **`resetViewColumn(viewId)`** - Réinitialise la configuration d'une vue.
+- **`setWindowState(winId, state)`** - Enregistre l'état d'une fenêtre.
+- **`getWindowState(winId, defaultState)`** - Récupère l'état d'une fenêtre.
+- **`closeWindow(winId)`** - Ferme une fenêtre.
+- **`setLocale(locale)`** - Définit la langue de l'interface.
+- **`changeLocale(locale)`** - Change la préférence de langue de l'utilisateur.
+- **`getLocale()`** - Récupère la langue actuelle de l'interface.
+- **`setTips(tipsId, state)`** - Enregistre l'état d'une astuce.
+- **`setSplitters(splitterId, state)`** - Enregistre l'état d'un séparateur.
+- **`setDialogs(dialogId, state)`** - Enregistre l'état d'une boîte de dialogue.
+- **`setLastColorsPicker(state)`** - Enregistre les dernières couleurs utilisées.
+- **`setDesktopClock(theme, state)`** - Enregistre la configuration de l'horloge de bureau.
+- **`setTranslatableTextField(state)`** - Enregistre la configuration des champs de texte traduisibles.
+- **`setZoom(zoom)`** - Définit le niveau de zoom de l'interface.
+- **`getZoom()`** - Récupère le niveau de zoom actuel de l'interface.
+- **`setTheme(theme)`** - Définit le thème visuel.
+- **`getTheme()`** - Récupère le thème visuel actuel.
+- **`setAccessToEggsThemes(show)`** - Active ou désactive l'accès aux thèmes spéciaux.
+- **`togglePrototypeMode()`** - Active ou désactive le mode prototype.
+- **`save()`** - Sauvegarde l'état de la session client.
+
 ```javascript
 // Dans une méthode d'un acteur Elf
 async elfQuest() {
@@ -154,6 +230,11 @@ async elfQuest() {
 ### `child-process.js`
 
 Ce fichier définit un service qui permet de lancer des processus externes depuis l'application. Il utilise `xcraft-core-process` pour gérer les processus.
+
+#### Méthodes publiques
+
+- **`create(executablePath, options)`** - Crée un nouveau gestionnaire de processus enfant.
+- **`spawn(executableArguments, additionalOptions)`** - Lance un processus externe avec les arguments spécifiés.
 
 ```javascript
 // Dans une méthode d'un acteur Elf
@@ -180,6 +261,12 @@ Ce fichier contient des utilitaires pour analyser et rapporter les capacités GP
 
 Il est utilisé pour vérifier si l'ordinateur peut exécuter correctement l'application et pour afficher des avertissements si nécessaire.
 
+#### Méthodes publiques
+
+- **`isBad(features)`** - Vérifie si les fonctionnalités GPU sont insuffisantes.
+- **`isMinimal(features)`** - Vérifie si les fonctionnalités GPU minimales sont disponibles.
+- **`getReport(features)`** - Génère un rapport détaillé des fonctionnalités GPU.
+
 ```javascript
 // Exemple d'utilisation interne
 const {isBad, isMinimal, getReport} = require('./GPUStatus.js');
@@ -189,10 +276,6 @@ if (isBad(infos) || !isMinimal(infos)) {
 }
 console.log(getReport(infos));
 ```
-
-### `config.js`
-
-Ce fichier définit la configuration du module, exposant les options configurables via `xcraft-core-etc`. Il permet de personnaliser le comportement du client, comme le goblin principal à démarrer, l'utilisation du login, etc.
 
 ### `eslint.config.js`
 
