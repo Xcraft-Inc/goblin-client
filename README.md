@@ -6,6 +6,16 @@ Le module `goblin-client` est un composant central du framework Xcraft qui gère
 
 Ce module sert de pont entre le framework Xcraft et l'environnement Electron, permettant de créer des applications de bureau riches et interactives.
 
+## Sommaire
+
+- [Aperçu](#aperçu)
+- [Structure du module](#structure-du-module)
+- [Fonctionnement global](#fonctionnement-global)
+- [Exemples d'utilisation](#exemples-dutilisation)
+- [Interactions avec d'autres modules](#interactions-avec-dautres-modules)
+- [Configuration avancée](#configuration-avancée)
+- [Détails des sources](#détails-des-sources)
+
 ## Structure du module
 
 - **Service principal** (`client.js`) : Gère le cycle de vie de l'application client
@@ -115,6 +125,20 @@ Ce fichier définit le service principal du client. Il gère le cycle de vie com
 - Création et gestion des laboratoires (environnements UI)
 - Gestion de l'authentification
 - Démarrage de l'interface utilisateur
+
+#### État et modèle de données
+
+L'état du service client comprend :
+
+```javascript
+{
+  booted: false,           // Indique si le client a démarré
+  private: {
+    desktopByLab: {},      // Mapping des laboratoires vers les bureaux
+    labByDesktop: {},      // Mapping des bureaux vers les laboratoires
+  }
+}
+```
 
 #### Méthodes publiques
 
@@ -231,6 +255,16 @@ async elfQuest() {
 
 Ce fichier définit un service qui permet de lancer des processus externes depuis l'application. Il utilise `xcraft-core-process` pour gérer les processus.
 
+#### État et modèle de données
+
+L'état du service de processus enfant est minimal :
+
+```javascript
+{
+  id: 'child-process@id'  // Identifiant du service
+}
+```
+
 #### Méthodes publiques
 
 - **`create(executablePath, options)`** - Crée un nouveau gestionnaire de processus enfant.
@@ -276,10 +310,6 @@ if (isBad(infos) || !isMinimal(infos)) {
 }
 console.log(getReport(infos));
 ```
-
-### `eslint.config.js`
-
-Ce fichier configure ESLint pour le module, définissant les règles de style de code et les plugins à utiliser. Il utilise la nouvelle configuration plate d'ESLint et configure plusieurs plugins comme React, JSDoc et Babel.
 
 Ce module est au cœur du framework Xcraft côté client, fournissant l'infrastructure nécessaire pour créer des applications de bureau riches et interactives.
 
