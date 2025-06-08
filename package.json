@@ -13,7 +13,7 @@
     }
   },
   "dependencies": {
-    "fs-extra": "^9.1.0",
+    "fs-extra": "^11.3.0",
     "gigawatts": "^4.0.5",
     "goblin-configurator": "^3.0.0",
     "goblin-laboratory": "^4.0.0",
@@ -22,7 +22,6 @@
     "goblin-wm": "^2.5.3",
     "statedb": "^4.1.0",
     "xcraft-core-etc": "^3.0.0",
-    "xcraft-core-fs": "^2.1.0",
     "xcraft-core-host": "^3.0.0",
     "xcraft-core-goblin": "^5.0.0",
     "xcraft-core-utils": "^4.0.0"
