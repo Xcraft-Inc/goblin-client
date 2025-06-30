@@ -1,6 +1,6 @@
 {
   "name": "goblin-client",
-  "version": "4.3.13",
+  "version": "4.3.16",
   "description": "Main goblin - client side",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,16 +13,15 @@
     }
   },
   "dependencies": {
-    "fs-extra": "^9.1.0",
+    "fs-extra": "^11.3.0",
     "gigawatts": "^4.0.5",
     "goblin-configurator": "^3.0.0",
     "goblin-laboratory": "^4.0.0",
     "goblin-nabu": "^2.0.0",
     "goblin-theme": "^2.0.0",
     "goblin-wm": "^2.5.3",
-    "statedb": "^4.1.0",
+    "statedb": "^4.2.2",
     "xcraft-core-etc": "^3.0.0",
-    "xcraft-core-fs": "^2.1.0",
     "xcraft-core-host": "^3.0.0",
     "xcraft-core-goblin": "^5.0.0",
     "xcraft-core-utils": "^4.0.0"
