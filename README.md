@@ -246,7 +246,7 @@ La **résolution de locale** suit cette logique dans `init-locale` : si l'utilis
 
 - **`create(id, sessionStorage)`** — Initialise la session : charge le fichier `.db` existant via `statedb`, restaure l'état si présent, résout la locale système via `nabu.findBestLocale` (Electron uniquement).
 
-- **`setViewColumnsOrder(viewId, columnsIds)`** — Définit l'ordre des colonnes d'une vue.
+- **`setViewColumnsOrder(viewId, columnIds)`** — Définit l'ordre des colonnes d'une vue.
 
 - **`setViewColumnWidth(viewId, columnId, width)`** — Définit la largeur d'une colonne.
 
